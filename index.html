@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing URL Detector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Phishing Detector</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#check">URL Check</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#history">Recent Checks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About Project</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features & Workflow</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dataset">Dataset</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tech">Technology Stack</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <section id="check" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h2 class="text-primary mb-3">Check a URL</h2>
+                    <form method="post" id="urlForm">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="urlInput" placeholder="Enter URL (e.g., https://example.com)" required>
+                            <button class="btn btn-primary" type="submit">Check</button>
+                        </div>
+                        <div id="loadingSpinner" class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </form>
+                    <div id="resultContainer" class="mt-4"></div>
+                </div>
+            </div>
+        </section>
+        <section id="history" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-primary">Recent Checks</h2>
+                    <table class="table table-striped table-hover mt-2" id="recentChecksTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>URL</th>
+                                <th>Result</th>
+                                <th>SSL Certificate</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-primary">About Project</h2>
+                    <p>
+                        The <strong>Phishing URL Detector</strong> is a cybersecurity web application that detects whether a URL is <strong>Legitimate</strong> or <strong>Phishing</strong> in real time. 
+                        It uses a <strong>hybrid machine learning and deep learning approach</strong> along with <strong>SSL certificate verification</strong>. 
+                        This tool can be used by banks, enterprises, and security-conscious users to prevent phishing attacks.
+                    </p>
+                    <section id="flowchart" class="mb-5">
+                        <div class="card shadow">
+                            <div class="card-body text-center">
+                                <h2 class="text-primary mb-4">System Workflow</h2>
+                                <div class="flowchart">
+                                    <div class="flow-step">
+                                        <div class="step-box">User Inputs URL on Web Interface</div>
+                                        <div class="arrow">↓</div>
+                                    </div>
+                                    <div class="flow-step">
+                                        <div class="step-box">Flask Backend Receives Request</div>
+                                        <div class="arrow">↓</div>
+                                    </div>
+                                    <div class="flow-step">
+                                        <div class="step-box">Feature Extraction & SSL Verification</div>
+                                        <div class="arrow">↓</div>
+                                    </div>
+                                    <div class="flow-step">
+                                        <div class="step-box">Models Predict (CNN + RF + XGB)</div>
+                                        <div class="arrow">↓</div>
+                                    </div>
+                                    <div class="flow-step">
+                                        <div class="step-box">Hybrid Probability Calculation</div>
+                                        <div class="arrow">↓</div>
+                                    </div>
+                                    <div class="flow-step">
+                                        <div class="step-box">Result Displayed with SSL Info</div>
+                                        <div class="arrow">↓</div>
+                                    </div>
+                                    <div class="flow-step">
+                                        <div class="step-box">Recent Checks Updated</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <section id="features" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-primary">Features & Workflow</h2>
+                    <h5>Key Features</h5>
+                    <ul>
+                        <li>Hybrid prediction combining CNN, RF, and XGB models.</li>
+                        <li>SSL certificate analysis for HTTPS websites.</li>
+                        <li>Real-time detection with recent checks history.</li>
+                        <li>User-friendly responsive interface.</li>
+                    </ul>
+                    <h5 class="mt-3">Workflow</h5>
+                    <ol>
+                        <li>User enters a URL.</li>
+                        <li>Models (CNN, RF, XGB) generate phishing probabilities.</li>
+                        <li>SSL certificate is verified if HTTPS is present.</li>
+                        <li>Final result (Phishing or Legitimate) is displayed along with SSL details.</li>
+                        <li>Recent checks are updated automatically.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <section id="dataset" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-primary">Dataset</h2>
+                    <p>
+                        The system is trained on the <strong>PHIUSIIL Phishing URL Dataset</strong>, which contains URLs labeled as <strong>Legitimate (0)</strong> or <strong>Phishing (1)</strong>.
+                    </p>
+                    <ul>
+                        <li><strong>Columns:</strong> URL, Label</li>
+                        <li><strong>Total Features Extracted:</strong> URL length, number of dots, hyphens, underscores, slashes, digits, HTTPS presence, suspicious TLDs.</li>
+                    </ul>
+                    <table class="table table-bordered table-sm mt-2">
+                        <thead><tr><th>URL</th><th>Label</th></tr></thead>
+                        <tbody>
+                            <tr><td>http://www.example.com</td><td>0 (Legitimate)</td></tr>
+                            <tr><td>http://malicious-site.ru</td><td>1 (Phishing)</td></tr>
+                        </tbody>
+                    </table>
+                    <img src="{{ url_for('static', filename='dataset.png') }}" class="img-fluid rounded shadow mt-3" alt="Dataset Snapshot">
+                </div>
+            </div>
+        </section>
+        <section id="tech" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-primary">Technology Stack</h2>
+                    <ul>
+                        <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript</li>
+                        <li><strong>Backend:</strong> Flask (Python)</li>
+                        <li><strong>Machine Learning:</strong> Random Forest, XGBoost, TF-IDF, VarianceThreshold</li>
+                        <li><strong>Deep Learning:</strong> TensorFlow, Keras (CNN + Bidirectional LSTM)</li>
+                        <li><strong>Others:</strong> joblib, Pandas, NumPy</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
